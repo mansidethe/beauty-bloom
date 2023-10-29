@@ -3,8 +3,8 @@ import mongoose from 'mongoose'
 import dotenve from 'dotenv'
 dotenve.config();
 
-import User from './models/user'
-import Product from './models/product';
+import User from './models/user.js'
+import Product from './models/product.js';
 
 const app = express ();
 app.use(express.json());
