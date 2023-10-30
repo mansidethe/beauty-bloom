@@ -22,13 +22,13 @@ connectDB();
 app.post("/signup",async (req, res) => {
     const{name,email,password,mobile,address,gender}=req.body;
 
-    const user=new user({
+    const user=new User({
         name:name,
         email:email,
         password:password,
         mobile:mobile,
         address:address,
-        gender:gender
+        gender:gender,
     });
    try{
     const savedUser=await user.save();
@@ -36,13 +36,13 @@ app.post("/signup",async (req, res) => {
         success:true,
         data: savedUser,
         message:"user created successfully"
-    })
+    });
    }
    catch(e){
     res.json({
     success:false,
     message:e.message
-})
+});
    }
 });
 
@@ -53,7 +53,7 @@ app.post("/login",async (req, res) => {
       return res.json({
         success:false,
         message:"please provide email and password"
-       })
+       });
     }
     const user =await User.findOne({
         email:email,
@@ -63,6 +63,7 @@ app.post("/login",async (req, res) => {
     if(user){
         return res.json({
             success:true,
+            data:user,
             message:"login successful"
         });
     }
@@ -117,7 +118,7 @@ res.json({
 app.get("/product/:id",async(req,res)=>{
 const {id} = req.params;
 
-const product = await Product.findById(id);
+const product = await Product.findById({_id: id});
  res.json({
     success:true,
     data:product,
@@ -140,7 +141,7 @@ const {name,description,price,image,category,brand}=req.body;
     category:category,
     brand:brand,
 }});
-const updatedProduct = await Product.findById(id);
+const updatedProduct = await Product.findById({_id: id});
 
 res.json({
     success:true,
@@ -175,6 +176,63 @@ res.json({
 });
 
 });
+
+//Order/GET/id
+
+app.get("/order/:id", async (req, res) => {
+    const { id } = req.params;
+  
+    const order = await Order.findOne({ _id: id }).populate("user  product");
+  
+    order.user.password = undefined;
+  
+    res.json({
+      success: true,
+      data: order,
+      message: "find product successfuly",
+    });
+  });
+  
+  //GET/products/
+  app.get("/orders", async (req, res) => {
+    const findProducts = await Order.find().populate("user product");
+  
+    findProducts.forEach((order) => {
+      order.user.password = undefined;
+    });
+    res.json({
+      success: true,
+      data: findProducts,
+      message: "fetch all productes.... !",
+    });
+  });
+  //GET/userbyid/
+  
+  app.get("/userbyid/:id", async (req, res) => {
+    const { id } = req.params;
+    const user = await Order.find({ _id: id }).populate("user product");
+    res.json({
+      success: true,
+      data: user,
+      message: "perticular user product",
+    });
+  });
+  
+  // PATCH /status
+  
+  app.patch("/status/:id", async (req, res) => {
+    const { status } = req.body;
+    const { id } = req.params;
+    await Order.updateOne({ _id: id }, { $set: { status: status } });
+    const updatedProduct = await Order.findOne({ _id: id });
+    console.log(updatedProduct);
+    res.json({
+      success: true,
+      data: updatedProduct,
+      message: "update succssefully",
+    });
+  });
+  
 
 const PORT = process.env.PORT || 8080 ;
 
