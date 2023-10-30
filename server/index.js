@@ -5,6 +5,7 @@ dotenve.config();
 
 import User from './models/user.js'
 import Product from './models/product.js';
+import Order from './models/order.js';
 
 const app = express ();
 app.use(express.json());
@@ -57,7 +58,7 @@ app.post("/login",async (req, res) => {
     }
     const user =await User.findOne({
         email:email,
-        password:password
+        password:password,
     }).select("name email mobile")
 
     if(user){
@@ -87,7 +88,7 @@ app.get("/products",async(req,res)=>{
 })
 
 //post/product
-app.get("/products",async(req,res)=>{
+app.post("/product",async(req,res)=>{
     const {name,description,price,image,category,brand}=req.body;
 
     const product = new Product({
@@ -177,7 +178,36 @@ res.json({
 
 });
 
-//Order/GET/id
+// post / order (product)
+app.post("/order", async (req, res) => {
+    const {user, product,quantity,shippingAddress, deliveryCharges}=req.body;
+
+    const order = new Order({
+        user:user,
+        product:product,
+        quantity:quantity,
+        shippingAddress:shippingAddress,
+        deliveryCharges:deliveryCharges
+    });
+        
+try{
+    const savedOrder= await order.save();
+    res.json({
+        success:true,
+        data:savedOrder,
+        message:"order successfully"
+    });
+}
+catch(e){
+    res.json({
+        success:false,
+        message:e.message
+    });
+}  
+
+});
+
+//get/order/id
 
 app.get("/order/:id", async (req, res) => {
     const { id } = req.params;
@@ -193,7 +223,7 @@ app.get("/order/:id", async (req, res) => {
     });
   });
   
-  //GET/products/
+  //GET/ orders
   app.get("/orders", async (req, res) => {
     const findProducts = await Order.find().populate("user product");
   
@@ -206,9 +236,10 @@ app.get("/order/:id", async (req, res) => {
       message: "fetch all productes.... !",
     });
   });
+
   //GET/userbyid/
   
-  app.get("/userbyid/:id", async (req, res) => {
+  app.get("/orders/user/:id", async (req, res) => {
     const { id } = req.params;
     const user = await Order.find({ _id: id }).populate("user product");
     res.json({
@@ -220,7 +251,7 @@ app.get("/order/:id", async (req, res) => {
   
   // PATCH /status
   
-  app.patch("/status/:id", async (req, res) => {
+  app.patch("/order/status/:id", async (req, res) => {
     const { status } = req.body;
     const { id } = req.params;
     await Order.updateOne({ _id: id }, { $set: { status: status } });
