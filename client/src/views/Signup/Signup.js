@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import './Signup.css'
 import axios from 'axios'
 
@@ -36,21 +37,21 @@ function Signup() {
             return;
         }
 
-const response = await axios.post("/signup",{
-    name:name,
-    email:email,
-    password:password,
-    mobile:mobile,
-    address:address,
-    gender:gender
-})
+        const response = await axios.post("/signup", {
+            name: name,
+            email: email,
+            password: password,
+            mobile: mobile,
+            address: address,
+            gender: gender
+        })
 
-alert(response?.data?.message)  ;
+        alert(response?.data?.message);
 
-if(response?.data?.success){
-window.location.href='/login';
-}
-};
+        if (response?.data?.success) {
+            window.location.href = '/login';
+        }
+    };
 
     return (
         <div>
@@ -140,6 +141,10 @@ window.location.href='/login';
                 >
                     Signup
                 </button>
+
+                <p className="text-right">
+                    <Link to="/login">Already have an account</Link>
+                </p>
 
             </form>
         </div>

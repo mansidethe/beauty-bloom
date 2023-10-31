@@ -6,6 +6,10 @@ body {
 .text-center{
   text-align: center;
 }
+.text-right{
+  text-align: right;
+  text-decoration: none;
+}
 .form-control{
     display: block;
     font-size: 15px;
