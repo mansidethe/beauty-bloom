@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Login.css'
 import axios from 'axios';
+import Navbar from '../../components/Navbar/Navbar';
 
 function Login() {
 
@@ -22,6 +23,7 @@ alert(response?.data?.message);
   }
   return (
     <div>
+      <Navbar/>
       <form className="login-form">
         <h1 className='text-center'>Login</h1>
 
@@ -53,7 +55,8 @@ alert(response?.data?.message);
           <Link to="/signup">Create a new account</Link>
         </p>
 
-      </form>
+
+ </form>
     </div>
   )
 }
