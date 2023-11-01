@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Login.css'
 import axios from 'axios';
@@ -8,6 +8,7 @@ function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPssword] = useState('');
+  const [user, setUser] = useState('');
 
   const login = async () => {
     const response= await axios.post('/login',{
@@ -20,7 +21,19 @@ alert(response?.data?.message);
   localStorage.setItem("user", JSON.stringify(response?.data?.data));
   window.location.href="/";
   }
-  }
+  
+  };
+
+  useEffect(()=>{
+    const storgeUser = JSON.parse(localStorage.getItem('user')||'{}');
+    console.log(storgeUser);
+
+    if(storgeUser?.email){
+      alert('you are already logged in')
+      window.location.href='/'
+    }
+  },[])
+
   return (
     <div>
       <Navbar/>

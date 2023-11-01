@@ -14,7 +14,7 @@ function Navbar() {
     <div className='navbar'>
         <Link to ='/' className='navbar-brand'>Beauty Bloom</Link>
 
-        <div>
+        <div className='navbar-links'>
         <Link to ='/login' className='navbar-link'>Login</Link>
 
         <Link to ='/signup' className='navbar-link'>Signup</Link>
@@ -22,7 +22,7 @@ function Navbar() {
         <Link to ='/orders' className='navbar-link'>My orders</Link>
         </div>
 
-        <div>
+        <div className='hello-user-text'>
   Hello, {user.name|| 'User!'}
   {
     user.name?(
@@ -36,8 +36,6 @@ function Navbar() {
   }
 </div>
  </div>
-
-
 
   )
 }
