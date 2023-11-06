@@ -1,0 +1,33 @@
+.order-card{
+background-color: white;
+padding: 10px;
+margin: 50px 20px;
+box-shadow: 0 0 10px 2px black;
+position: relative;
+}
+.order-container{
+    padding: 10px 50px;
+}
+.order-status{
+position: absolute;
+top: 10px;
+right: 10px;
+font-size: 20px;
+color: blue;
+padding: 2px 10px;
+border-radius: 5px;
+width: 100px;
+text-align: center;
+}
+.product-name-link{
+    text-decoration: none;
+}
+.badge-danger{
+    background-color: red;
+}
+.badge-warning{
+    background-color:orange;
+}
+.badge-success{
+    background-color:green;
+}

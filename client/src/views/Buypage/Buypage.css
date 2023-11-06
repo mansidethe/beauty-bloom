@@ -1,0 +1,40 @@
+.buy-product-image{
+    height: 400px;
+}
+.buy-product-container{
+    padding: 20px 100px;
+}
+.buy-product-info{
+    display: flex;
+   flex-wrap: wrap;
+  }
+.buy-product-txt{
+    margin-left: 50px;
+}
+.btn-increase-quantity{
+   
+    background-color: white;
+    box-shadow: 0 0 10px black;
+   
+}
+.btn-decrease-quantity{
+  
+    background-color: white;
+    box-shadow: 0 0 10px black;
+   
+}
+
+
+@media screen and (max-width:768px){
+    .buy-product-container{
+        padding:10px;
+    } 
+    .buy-product-image{
+       width: 50%;
+       display: block;
+       margin: 10px auto;
+}
+.buy-product-info{
+   flex-direction: column;
+}
+}

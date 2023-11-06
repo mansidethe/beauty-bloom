@@ -6,6 +6,7 @@ import Home from './views/Home/Home'
 import Login from './views/Login/Login';
 import Signup from './views/Signup/Signup';
 import Myorders from './views/Myorders/Myorders'
+import Buypage from './views/Buypage/Buypage';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/orders",
     element: <Myorders/>,
+  },
+  {
+    path: "/buy/:id",
+    element: <Buypage/>,
   },
  
 ])
