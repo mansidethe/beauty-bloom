@@ -33,6 +33,7 @@
     margin: 0 10px;
     cursor: pointer;
 }
+
 @media screen and (max-width: 668px) {
    .navbar{
     display: flex;

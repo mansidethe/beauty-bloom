@@ -15,7 +15,7 @@
 }
 .product-card-name{
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 1000;
     /* display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -24,12 +24,14 @@
 }
 .product-card-price{
     font-size: 20px;
-    font-weight:500 ;
+    font-weight:800 ;
     color: rgb(13, 13, 60);
+    
 }
 .product-card-btn{
 display: block;
-width: 100%;
+width: 90%;
 font-size: 16px;
 text-decoration: none;
+
 }
